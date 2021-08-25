@@ -1,0 +1,16 @@
+<div class="container"><br><br>
+  <% if @mitsu.user.name != nil %>
+    <h1><%= @mitsu.user.name %>'s mitsu </h1>
+  <% else %>
+    <h1><%= "hachi#{@mitsu.user.id}'s mitsu" %></h1>
+  <% end %><br>
+
+  <h3>Title:　<%= @mitsu.title %></h3><br>
+  <h3>Content</h3>
+  <h5 class="text-break"><%= @mitsu.content %></h5><br><br>
+
+
+
+
+  <h4><%= link_to "mitsu list", mitsus_path, class: "text-muted" %></h4>
+</div>

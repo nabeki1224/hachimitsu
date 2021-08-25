@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Make your Mitsu</h1>
+  <%= form_with(model: @mitsu, local: true) do |form| %>
+    <% if @mitsu.errors.any? %>
+      <div id="error_explanation">
+      	<h3>Please enter all boxes</h3>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.text_field :title, placeholder: "Title" %>
+    </div><br>
+
+    <div class="field">
+      <%= form.text_area :content, placeholder: "What's Happen..?" %>
+    </div><br>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-info" %>
+    </div>
+  <% end %>
+</div>

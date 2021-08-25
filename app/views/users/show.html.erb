@@ -1,0 +1,48 @@
+<div class="container"> 
+	<% if @user.icon.attached? %>
+		<%= image_tag @user.icon, size: '100x100', class: "rounded-circle" %>
+	<% else %>
+		<%= image_tag "no_image.png", size: '100x100', class: "rounded-circle" %>
+	<% end %>
+
+  <% if @user.id == current_user.id %>
+  	<h1>Your Information</h1>
+  <% else %>
+  	<% if @user.name != "" %>
+  		<h1><%= @user.name %>'s Information</h1>
+  	<% else %>
+  		<h1><%= "Hachi#{@user.id}(Unnamed)'s Information" %></h1>
+  	<% end %>
+  <% end %>
+
+    <% if @user.name != "" %>
+      <h3>Name: <%= @user.name %></h3>
+    <% else %>
+      <h3>Name: <%= link_to "Unnamed", edit_user_registration_path, class: "text-decoration-none" %></h3><br>
+    <% end %><br>
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %><br><br>
+
+
+  <h1>Listing mitsus</h1><br><br>
+
+  <div class="row">
+  	<% if @mitsus != [] %>
+	    <% @mitsus.reverse_each do |mitsu| %>
+	      <div class="col-12 col-md-5 mitsu-panel card">
+	        <h2><%= mitsu.title %></h2>
+	        <p><%= mitsu.content %></p>
+	        <p><%= mitsu.created_at %></p>
+	        <div class="mitsu-links">
+	          <%= link_to 'Show', mitsu, class: 'btn btn-outline-dark' %>
+	          <% if @user == current_user %> |
+		          <%= link_to 'Destroy', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+		        <% end %>
+	        </div>
+	      </div>
+	    <% end %>
+	<% else %>
+		<h2>No mitsus yet...</h2>
+		<h2><b><%= link_to "Let's Create Your mitsu!!", new_mitsu_path if @user == current_user %></b></h2>
+	<% end %>
+  </div>
+</div>

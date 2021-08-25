@@ -1,0 +1,32 @@
+<div class="container"> 
+  <p id="notice"><%= notice %></p>
+  <h1>Your Information</h1>
+  <% if current_user %>
+    <% if current_user.name != nil %>
+      <h3>Name: <%= current_user.name %></h3>
+    <% else %>
+      <%= link_to "What's Your Name...?", edit_user_registration_path, class: "text-decoration-none" %><br>
+    <% end %><br>
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-success text-light" %>
+  <% else %>
+    ゲストユーザーです。
+  <% end %><br><br>
+
+
+  <h1>Listing Mitsus</h1>
+
+  <div class="row">
+    <% @mitsus.reverse_each do |mitsu| %>
+      <div class="col-12 col-md-5 mitsu-panel card">
+        <h2><%= mitsu.title %></h2>
+        <p><%= mitsu.content %></p>
+        <div class="mitsu-links">
+          <%= link_to 'Show', mitsu, class: 'btn btn-outline-dark' %>
+          <% if mitsu.user.id == current_user.id %> |
+            <%= link_to 'Destroy', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -7,9 +7,56 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/aebb7cd231.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="pb-0">
+    <header class="site-header sticky-top py-1 bg-dark">
+      <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <%= link_to root_path do %>
+          <%= image_tag "bee.png", size: "50x50" %>
+        <% end %>
+        <% if user_signed_in? %>
+          <%= link_to "Top", root_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Mypage", user_path(current_user), class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Mitsu", mitsus_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Users", users_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Create Mitsu", new_mitsu_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: {confirm: 'Log Out？'}, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+        <% else %>
+          <%= link_to "Sign Up (Free)", new_user_registration_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "Sign In", new_user_session_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "About", "#", class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <%= yield %><br><br><br>
+    
+    <footer class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md mt-2">
+          <%= link_to root_path do %>
+            <%= image_tag "bee.png", size: "50x50" %>
+          <% end %>
+          <small class="d-block mb-3 text-muted">© 2021</small>
+          </div>
+
+          <div class="col-6 col-md mt-4">
+            <ul>
+              <% if user_signed_in? %>
+                <li><%= link_to "Mypage", user_path(current_user), class: "text-orange text-decoration-none" %></li>
+                <li><%= link_to "Mitsu", mitsus_path, class: "text-orange text-decoration-none" %></li>
+              <% else %>
+                <li><%= link_to "Sign Up(Free)", new_user_registration_path, class: "text-orange text-decoration-none" %></li>
+                <li><%= link_to "Sign In", new_user_session_path, class: "text-orange text-decoration-none" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
