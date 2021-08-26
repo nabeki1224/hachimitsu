@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 2..10 }
 
   scope :all_user, -> {
-    select(:id, :name, :icon)
+    select(:id, :name)
   }
 
 end

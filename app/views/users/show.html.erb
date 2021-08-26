@@ -1,29 +1,36 @@
 <div class="container"> 
+
+  <% if @user.id == current_user.id %>
+  	<h1>あなたのプロフィール</h1>
+  <% else %>
+  	<% if @user.name != "" %>
+  		<h1><%= @user.name %>のプロフィール</h1>
+  	<% else %>
+  		<h1><%= "ハチ#{@user.id}(名前未設定)のプロフィール" %></h1>
+  	<% end %>
+  <% end %>
+
 	<% if @user.icon.attached? %>
 		<%= image_tag @user.icon, size: '100x100', class: "rounded-circle" %>
 	<% else %>
 		<%= image_tag "no_image.png", size: '100x100', class: "rounded-circle" %>
 	<% end %>
 
-  <% if @user.id == current_user.id %>
-  	<h1>Your Information</h1>
+  <% if @user.name != "" %>
+    <h3><%= @user.name %></h3>
   <% else %>
-  	<% if @user.name != "" %>
-  		<h1><%= @user.name %>'s Information</h1>
+    <h3><%= link_to "名前未設定", edit_user_registration_path, class: "text-decoration-none" %></h3><br>
+  <% end %><br>
+  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %><br><br>
+
+
+  <h1>
+  	<% if @user.id == current_user.id %>
+  		<h1>あなたが作った蜜</h1>
   	<% else %>
-  		<h1><%= "Hachi#{@user.id}(Unnamed)'s Information" %></h1>
+  		<h1><%= @user.name %>が作った蜜</h1>
   	<% end %>
-  <% end %>
-
-    <% if @user.name != "" %>
-      <h3>Name: <%= @user.name %></h3>
-    <% else %>
-      <h3>Name: <%= link_to "Unnamed", edit_user_registration_path, class: "text-decoration-none" %></h3><br>
-    <% end %><br>
-    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %><br><br>
-
-
-  <h1>Listing mitsus</h1><br><br>
+  </h1><br><br>
 
   <div class="row">
   	<% if @mitsus != [] %>
@@ -33,16 +40,16 @@
 	        <p><%= mitsu.content %></p>
 	        <p><%= mitsu.created_at %></p>
 	        <div class="mitsu-links">
-	          <%= link_to 'Show', mitsu, class: 'btn btn-outline-dark' %>
+	          <%= link_to '詳しく見る', mitsu, class: 'btn btn-outline-dark' %>
 	          <% if @user == current_user %> |
-		          <%= link_to 'Destroy', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+		          <%= link_to '削除', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
 		        <% end %>
 	        </div>
 	      </div>
 	    <% end %>
 	<% else %>
-		<h2>No mitsus yet...</h2>
-		<h2><b><%= link_to "Let's Create Your mitsu!!", new_mitsu_path if @user == current_user %></b></h2>
+		<h2>まだ蜜がありません。</h2>
+		<h4><b><%= link_to "あなたも蜜を作ってみませんか？", new_mitsu_path, class: "text-muted" if @user == current_user %></b></h4>
 	<% end %>
   </div>
 </div>

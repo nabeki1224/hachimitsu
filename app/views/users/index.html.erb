@@ -1,5 +1,5 @@
 <div class="container"><br><br>
-	<h1>Hachi List</h1><br><br><br>
+	<h1>ハチリスト</h1><br><br><br>
 	<div class="list-group w-50">
 		<% @users.reverse_each do |user| %>
 			<div class="list-group-item text-muted">
@@ -9,13 +9,11 @@
 				<% else %>
 					<%= image_tag "no_image.png", size: '50x50', class: "rounded-circle" %>
 				<% end %>
-				<%= link_to user.name, user_path(user) unless user.name == nil || user.name == "" %>
+				<%= link_to user.name, user_path(user), class: "text-decoration-none text-dark" unless user.name == nil || user.name == "" %>
 				<%= link_to "Hachi#{user.id}(Unnamed)", user_path(user) if user.name == nil || user.name == "" %>
 
 
 			</div>
 		<% end %>
-
-
-		<br><br><br><br><br><br>
+	</div><br><br><br><br><br><br>
 </div>

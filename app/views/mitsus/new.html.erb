@@ -1,22 +1,22 @@
 <div class="container">
-  <h1>Make your Mitsu</h1>
+  <h1>蜜を作る</h1>
   <%= form_with(model: @mitsu, local: true) do |form| %>
     <% if @mitsu.errors.any? %>
       <div id="error_explanation">
-      	<h3>Please enter all boxes</h3>
+      	<h3>すべての項目を埋めてください。</h3>
       </div>
     <% end %>
 
     <div class="field">
-      <%= form.text_field :title, placeholder: "Title" %>
+      <%= form.text_field :title, placeholder: "タイトル", class: "form-control" %>
     </div><br>
 
     <div class="field">
-      <%= form.text_area :content, placeholder: "What's Happen..?" %>
+      <%= form.text_area :content, placeholder: "ゴキブリを踏みました。", class: "form-control" %>
     </div><br>
 
     <div class="actions">
-      <%= form.submit class: "btn btn-info" %>
+      <%= form.submit "蜜を作る", class: "btn btn-warning" %>
     </div>
   <% end %>
 </div>

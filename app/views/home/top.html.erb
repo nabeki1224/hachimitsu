@@ -1,17 +1,17 @@
 <div class="container"><br><br><br>
 	<div class="row mx-auto">
 		<% if user_signed_in? %>
-			<%= link_to "Mitsu", mitsus_path, class: "btn btn-outline-warning col-md-12 top-button" %>
-			<%= link_to "Mypage", user_path(current_user), class: "btn btn-outline-primary col-md-12 top-button mt-1" %>
-			<%= link_to "Create Mitsu", new_mitsu_path, class: "btn btn-outline-danger col-md-12 top-button mt-1" %>
+			<%= link_to "みんなの蜜", mitsus_path, class: "btn btn-outline-warning col-md-12 top-button" %>
+			<%= link_to "マイページ", user_path(current_user), class: "btn btn-outline-primary col-md-12 top-button mt-1" %>
+			<%= link_to "蜜を作る", new_mitsu_path, class: "btn btn-outline-danger col-md-12 top-button mt-1" %>
 		<% else %>
 				<div class="col-md-2"></div>
 				<div class="col-md-4">
-					<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-success top-button" %>
+					<%= link_to "アカウントを登録して蜜をみる（無料）", new_user_registration_path, class: "btn btn-warning top-button" %>
 				</div>
 
 				<div class="col-md-4">
-					<%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-dark top-button" %>
+					<%= link_to "アカウントをお持ちの方はこちら", new_user_session_path, class: "btn btn-outline-dark top-button" %>
 				</div>
 				<div class="col-md-2"></div>
 		<% end %>

@@ -1,34 +1,34 @@
 <div class="container"> 
-  <h2>Sign up</h2>
+  <h2>アカウント作成</h2>
 
   <b><%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, autofocus: true, placeholder: "NickName" %>
+      <%= f.label :name, "名前", class: "form-label" %><br>
+      <%= f.text_field :name, autofocus: true, placeholder: "名前（公開されます。）", class: "form-control" %>
     </div>
 
     <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@com" %>
+      <%= f.label :email, "メールアドレス", class: "form-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@com", class: "form-control" %>
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label :password, "パスワード", class: "form-label" %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "password", class: "form-control" %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm" %>
-    </div>
+      <%= f.label :password_confirmation, "パスワード（確認）", class: "form-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm", class: "form-control" %>
+    </div><br>
 
     <div class="actions">
-      <%= f.submit "Sign up", class: "btn btn-success" %>
+      <%= f.submit "アカウント作成", class: "btn btn-success" %>
     </div>
   <% end %>
 
