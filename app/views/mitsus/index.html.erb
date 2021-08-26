@@ -2,7 +2,7 @@
   <p id="notice"><%= notice %></p>
   <h1>あなたのプロフィール</h1>
   <% if current_user.icon.attached? %>
-    <%= image_tag current_user.icon, size: '50x50', class: "rounded-circle" %>
+    <%= image_tag current_user.icon, size: '100x100', class: "rounded-circle" %>
   <% else %>
     <%= image_tag "no_image.png", size: '100x100', class: "rounded-circle" %>
   <% end %>
@@ -25,12 +25,30 @@
       <div class="col-12 col-md-5 mitsu-panel card ms-2 me-2">
         <h2><%= mitsu.title %></h2>
         <%= mitsu.content %>
-      　<%= link_to "ハチ名：#{mitsu.user.name}", user_path(mitsu.user), class: "text-decoration-none text-dark" %>
+      　<%= link_to "ハチ名：#{mitsu.user.name}", user_path(mitsu.user), class: "text-decoration-none text-dark" %><br>
         <div class="mitsu-links">
-          <%= link_to '詳しくみる', mitsu, class: 'btn btn-outline-dark' %>
-          <% if mitsu.user.id == current_user.id %> |
-            <%= link_to '削除', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
-          <% end %>
+          <%= link_to '詳しくみる', mitsu, class: 'btn btn-outline-dark col-md-5' %>
+          <% if mitsu.user.id == current_user.id %>
+            <%= link_to '削除', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger col-md-5' %>
+          <% else %>
+            <%= link_to "#{mitsu.user.name}のページに行く", "#", class: "btn btn-outline-success col-md-5" %>
+          <% end %><br><br>
+          <% if !mitsu.goods.where(user_id: current_user.id).empty? %>
+            
+              <%= link_to "#{mitsu.goods.count}いいね", "#", class: "btn btn-primary col-md-5" %>
+            
+              <%= link_to "イマイチ", "#", class: "btn btn-outline-danger col-md-5" %>
+          <% elsif !mitsu.bads.where(user_id: current_user.id).empty? %>
+            
+              <%= link_to "#{mitsu.goods.count}いいね", "#", class: "btn btn-outline-primary col-md-5" %>
+            
+              <%= link_to "イマイチ", "#", class: "btn btn-danger col-md-5" %>
+          <% else %>
+            
+              <%= link_to "#{mitsu.goods.count}いいね", mitsu_goods_path(mitsu), method: :post, class: "btn btn-outline-primary col-md-5" %>
+            
+              <%= link_to "イマイチ", mitsu_bads_path(mitsu), method: :post, class: "btn btn-outline-danger col-md-5" %>
+          <% end %><br><br>
         </div>
       </div>
     <% end %>

@@ -145,3 +145,4 @@ ja:
       blank: は必須項目です。
       too_short: が短すぎます。
       too_long: が長すぎます。
+      taken: はすでに登録済みです。

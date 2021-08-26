@@ -9,6 +9,16 @@
   <h3>コンテンツ</h3>
   <h5 class="text-break"><%= @mitsu.content %></h5><br><br>
 
+  <% if !@mitsu.goods.where(user_id: current_user.id).empty? %>
+    <%= link_to "#{@mitsu.goods.count}いいね", "#", class: "btn btn-primary" %>
+    <%= link_to "イマイチ", "#", class: "btn btn-outline-danger" %>
+  <% elsif !@mitsu.bads.where(user_id: current_user.id).empty? %>
+    <%= link_to "#{@mitsu.goods.count}いいね", "#", class: "btn btn-outline-primary" %>
+    <%= link_to "イマイチ", "#", class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "#{@mitsu.goods.count}いいね", mitsu_goods_path(@mitsu), method: :post, class: "btn btn-outline-primary" %>
+    <%= link_to "イマイチ", mitsu_bads_path(@mitsu), method: :post, class: "btn btn-outline-danger" %>
+  <% end %>
 
 
 
