@@ -1,4 +1,4 @@
-<div class="container"> 
+<div class="container"><br><br>
   <p id="notice"><%= notice %></p>
   <h1>あなたのプロフィール</h1>
   <% if current_user.icon.attached? %>
@@ -22,10 +22,11 @@
 
   <div class="row">
     <% @mitsus.reverse_each do |mitsu| %>
-      <div class="col-12 col-md-5 mitsu-panel card ms-2 me-2">
+      <div class="col-12 col-sm-12 col-md-5 mitsu-panel card ms-2 me-2 mb-3">
         <h2><%= mitsu.title %></h2>
-        <%= mitsu.content %>
-      　<%= link_to "ハチ名：#{mitsu.user.name}", user_path(mitsu.user), class: "text-decoration-none text-dark" %><br>
+        <%= mitsu.content.truncate(20) %>
+      　<%= link_to "ハチ名：#{mitsu.user.name}", user_path(mitsu.user), class: "text-decoration-none text-dark" %>
+        Lv.<%= mitsu.level %><br>
         <div class="mitsu-links">
           <%= link_to '詳しくみる', mitsu, class: 'btn btn-outline-dark col-md-5' %>
           <% if mitsu.user.id == current_user.id %>
@@ -52,5 +53,6 @@
         </div>
       </div>
     <% end %>
+    <%= paginate @mitsus %><br>
   </div>
 </div>

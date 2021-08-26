@@ -75,3 +75,4 @@ gem 'kaminari'
 
 gem 'mini_magick'
 
+gem 'kaminari'

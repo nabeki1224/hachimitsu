@@ -4,7 +4,7 @@ class MitsusController < ApplicationController
   end
 
   def index
-    @mitsus = Mitsu.mitsu_index
+    @mitsus = Mitsu.mitsu_index.page(params[:page]).per(10)
   end
 
   def create

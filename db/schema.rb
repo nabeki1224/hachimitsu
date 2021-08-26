@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_023625) do
     t.string "title"
     t.text "content"
     t.integer "user_id"
+    t.integer "level", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

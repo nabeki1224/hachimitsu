@@ -33,7 +33,7 @@
 
     <%= yield %><br><br><br>
     
-    <footer class="footer fixed-bottom bg-dark">
+    <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col-12 col-md mt-2">
@@ -43,17 +43,6 @@
           <small class="d-block mb-3 text-muted">© 2021</small>
           </div>
 
-          <div class="col-6 col-md mt-4">
-            <ul>
-              <% if user_signed_in? %>
-                <li><%= link_to "マイページ", user_path(current_user), class: "text-orange text-decoration-none" %></li>
-                <li><%= link_to "みんなの蜜", mitsus_path, class: "text-orange text-decoration-none" %></li>
-              <% else %>
-                <li><%= link_to "アカウント作成（無料）", new_user_registration_path, class: "text-orange text-decoration-none" %></li>
-                <li><%= link_to "ログイン", new_user_session_path, class: "text-orange text-decoration-none" %></li>
-              <% end %>
-            </ul>
-          </div>
         </div>
       </div>
     </footer>

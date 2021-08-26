@@ -1,4 +1,4 @@
-<div class="container"> 
+<div class="container"><br><br>
 
   <% if @user.id == current_user.id %>
   	<h1>あなたのプロフィール</h1>
@@ -35,18 +35,19 @@
   <div class="row">
   	<% if @mitsus != [] %>
 	    <% @mitsus.reverse_each do |mitsu| %>
-	      <div class="col-12 col-md-5 mitsu-panel card">
+	      <div class="col-12 col-md-5 mitsu-panel card ms-2 me-2 mb-3">
 	        <h2><%= mitsu.title %></h2>
-	        <p><%= mitsu.content %></p>
+	        <p><%= mitsu.content.truncate(20) %></p>
 	        <p><%= mitsu.created_at %></p>
 	        <div class="mitsu-links">
-	          <%= link_to '詳しく見る', mitsu, class: 'btn btn-outline-dark' %>
-	          <% if @user == current_user %> |
-		          <%= link_to '削除', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+	          <%= link_to '詳しく見る', mitsu, class: 'btn btn-outline-dark col-md-5' %>
+	          <% if @user == current_user %> 
+		          <%= link_to '削除', mitsu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger col-md-5' %>
 		        <% end %>
-	        </div>
+	        </div><br>
 	      </div>
 	    <% end %>
+	    <%= paginate @mitsus %>
 	<% else %>
 		<h2>まだ蜜がありません。</h2>
 		<h4><b><%= link_to "あなたも蜜を作ってみませんか？", new_mitsu_path, class: "text-muted" if @user == current_user %></b></h4>
