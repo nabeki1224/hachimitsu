@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: "omniauth_callbacks",
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }  
   root to: "home#top"
   resources :users, only: [:index, :show]
   resources :mitsus, only: [:index, :show, :new, :destroy, :create] do
