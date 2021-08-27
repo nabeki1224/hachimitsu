@@ -5,6 +5,10 @@ class MitsusController < ApplicationController
 
   def index
     @mitsus = Mitsu.mitsu_index.page(params[:page]).per(10)
+
+    if params[:level]
+      @mitsus = Mitsu.where(level: params[:level]).page(params[:page]).per(10)
+    end
   end
 
   def create
