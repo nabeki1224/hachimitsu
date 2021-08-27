@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hachimitsu</title>
+    <title>蜂蜜</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -22,11 +22,12 @@
           <%= link_to "みんなの蜜", mitsus_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
           <%= link_to "他のハチ", users_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
           <%= link_to "蜜を作る", new_mitsu_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "使い方", about_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
           <%= link_to "サインアウト", destroy_user_session_path, method: :delete, data: {confirm: 'ログアウトしますか？'}, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
         <% else %>
           <%= link_to "アカウント作成（無料）", new_user_registration_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
           <%= link_to "ログイン", new_user_session_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
-          <%= link_to "#{"Hachimitsu"}とは", "#", class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
+          <%= link_to "#{"Hachimitsu"}とは", about_path, class: "py-2 d-none d-md-inline-block text-decoration-none text-orange" %>
         <% end %>
       </nav>
     </header>

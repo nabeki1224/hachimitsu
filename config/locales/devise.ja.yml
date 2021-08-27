@@ -28,6 +28,14 @@ ja:
         name: 名前
     models:
       user: ユーザー
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              invalid: は間違っています。
+
+
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -146,3 +154,4 @@ ja:
       too_short: が短すぎます。
       too_long: が長すぎます。
       taken: はすでに登録済みです。
+      record_invalid: バリデーションに失敗しました。

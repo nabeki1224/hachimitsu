@@ -2,8 +2,9 @@
 	<div class="row mx-auto">
 		<% if user_signed_in? %>
 			<%= link_to "みんなの蜜", mitsus_path, class: "btn btn-outline-warning col-md-12 top-button" %>
-			<%= link_to "マイページ", user_path(current_user), class: "btn btn-outline-primary col-md-12 top-button mt-1" %>
 			<%= link_to "蜜を作る", new_mitsu_path, class: "btn btn-outline-danger col-md-12 top-button mt-1" %>
+			<%= link_to "マイページ", user_path(current_user), class: "btn btn-outline-primary col-md-6 top-button mt-1" %>
+			<%= link_to "Hachimitsuについて", about_path, class: "btn btn-outline-success col-md-6 top-button mt-1" %>
 		<% else %>
 				<div class="col-md-2"></div>
 				<div class="col-md-4">

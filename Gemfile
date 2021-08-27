@@ -76,3 +76,6 @@ gem 'kaminari'
 gem 'mini_magick'
 
 gem 'kaminari'
+
+gem 'omniauth-line'
+

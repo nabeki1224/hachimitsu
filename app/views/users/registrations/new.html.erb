@@ -1,8 +1,8 @@
-<div class="container"> 
+<div class="container"><br><br> 
   <h2>アカウント作成</h2>
 
   <b><%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field">
       <%= f.label :name, "名前", class: "form-label" %><br>
@@ -29,8 +29,8 @@
 
     <div class="actions">
       <%= f.submit "アカウント作成", class: "btn btn-success" %>
-    </div>
+    </div><br>
   <% end %>
 
-  <%= render "devise/shared/links" %></b>
+  <%= render "users/shared/links" %></b>
 </div>
