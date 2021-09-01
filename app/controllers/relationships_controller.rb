@@ -1,14 +1,15 @@
 class RelationshipsController < ApplicationController
 	def create
-		relationship = Relationship.new(relationship_params)
-		relationship.follower_id = current_user.id
-		relationship.save
-		redirect_to request.referer
+		@relationship = Relationship.new(relationship_params)
+		@user = @relationship.followed
+		@relationship.follower_id = current_user.id
+		@relationship.save
 	end
 
 	def destroy
-		relationship = Relationship.find(params[:id]).destroy
-		redirect_to request.referer
+		@relationship = Relationship.find(params[:id])
+		@user = @relationship.followed
+		@relationship.destroy
 	end
 
 	private

@@ -1,0 +1,9 @@
+<% if current_user.following.include?(user) %>
+	<% relationship = Relationship.find_by(follower_id: current_user.id, followed_id: user.id) %>
+	<%= link_to "フォロー解除", relationship_path(relationship.id), method: :delete, remote: true, class: "btn btn-danger" %>
+<% else %>
+	<%= form_with model: relationship, remote: true do |f| %>
+		<%= f.hidden_field :followed_id, value: user.id %>
+		<%= f.submit "フォロー", class: "btn btn-outline-success" %>
+	<% end %>
+<% end %>

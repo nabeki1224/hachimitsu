@@ -17,21 +17,15 @@
 						</div>
 
 						<div class="col-md-3">
-						  <% if current_user.following.include?(user) %>
-						  	<% relationship = Relationship.find_by(follower_id: current_user.id, followed_id: user.id) %>
-						  	<%= link_to "フォロー解除", relationship_path(relationship.id), method: :delete, class: "btn btn-danger" %><br>
-						  <% else %>
-						  	<%= form_with model: @relationship, local: true do |f| %>
-						  		<%= f.hidden_field :followed_id, value: user.id %>
-						  		<%= f.submit "フォロー", class: "btn btn-outline-success" %>
-						  	<% end %>
-						  <% end %><br>
+							<div class="follow_btn_<%= user.id %>">
+								<%= render 'follows/followbtn', user: user, relationship: @relationship %>
+							</div>
 						</div>
 
 						<div class="col-md-5">
-						  <div class="follow-count">
-						  	<%= link_to "フォロー数#{user.following.count}", user_follow_path(user), class: "text-dark" %>  <%= link_to "フォロワー数#{user.follower.count}", user_follower_path(user), class: "text-dark" %>
-						  </div><br>
+						  <div class="follow_count_<%= user.id %>">
+						  	<%= render 'follows/followcount', user: user %>
+					  	</div><br>
 						</div>
 
 

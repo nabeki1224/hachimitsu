@@ -20,6 +20,7 @@
   <div class="row">
     <h1 class="col-md-5">みんなの蜜</h1>
     <div class="col-md-5">
+      <%= link_to "全表示", mitsus_path, class: "btn text-orange" %>
       <% 6.times do |n| %>
         <%= link_to "level#{n}", level_mitsus_path(n), class: "btn text-orange" %>
       <% end %>
@@ -32,7 +33,9 @@
         <h2><%= mitsu.title %></h2>
         <%= mitsu.content.truncate(20) %>
       　<%= link_to "ハチ名：#{mitsu.user.name}", user_path(mitsu.user), class: "text-decoration-none text-dark" %>
-        Lv.<%= mitsu.level %><br>
+        <div class="level_<%= mitsu.id %>">
+          <%= render 'level', mitsu: mitsu %><br>
+        </div>
         <div class="mitsu-links">
           <%= link_to '詳しくみる', mitsu, class: 'btn btn-outline-dark col-md-5' %>
           <% if mitsu.user.id == current_user.id %>
@@ -40,22 +43,9 @@
           <% else %>
             <%= link_to "#{mitsu.user.name}のページに行く", user_path(mitsu.user.id), class: "btn btn-outline-success col-md-5" %>
           <% end %><br><br>
-          <% if !mitsu.goods.where(user_id: current_user.id).empty? %>
-            
-              <%= link_to "#{mitsu.goods.count}いいね", "#", class: "btn btn-primary col-md-5" %>
-            
-              <%= link_to "イマイチ", "#", class: "btn btn-outline-danger col-md-5" %>
-          <% elsif !mitsu.bads.where(user_id: current_user.id).empty? %>
-            
-              <%= link_to "#{mitsu.goods.count}いいね", "#", class: "btn btn-outline-primary col-md-5" %>
-            
-              <%= link_to "イマイチ", "#", class: "btn btn-danger col-md-5" %>
-          <% else %>
-            
-              <%= link_to "#{mitsu.goods.count}いいね", mitsu_goods_path(mitsu), method: :post, class: "btn btn-outline-primary col-md-5" %>
-            
-              <%= link_to "イマイチ", mitsu_bads_path(mitsu), method: :post, class: "btn btn-outline-danger col-md-5" %>
-          <% end %><br><br>
+          <div class="goodbad-btn_<%= mitsu.id %>">
+            <%= render 'likebtn', mitsu: mitsu %>
+          </div>
         </div>
       </div>
     <% end %>
