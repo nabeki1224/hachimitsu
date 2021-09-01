@@ -1,0 +1,48 @@
+<div class="container"><br><br>
+	<h1>aaaa</h1>
+	<% if @follow.present? %>
+		<div class="list-group w-100">
+			<% @follow.reverse_each do |user| %>
+				<div class="list-group-item text-muted">
+					<div class="row">
+						<div class="col-md-4">
+							<%= user.id %>
+							<% if user.icon.attached? %>
+								<%= image_tag user.icon, size: '50x50', class: "rounded-circle" %>
+							<% else %>
+								<%= image_tag "no_image.png", size: '50x50', class: "rounded-circle" %>
+							<% end %>
+							<%= link_to user.name, user_path(user), class: "text-decoration-none text-dark" unless user.name == nil || user.name == "" %>
+							<%= link_to "Hachi#{user.id}(Unnamed)", user_path(user) if user.name == nil || user.name == "" %>
+						</div>
+
+						<div class="col-md-3">
+						  <% if current_user.following.include?(user) %>
+						  	<% relationship = Relationship.find_by(follower_id: current_user.id, followed_id: user.id) %>
+						  	<%= link_to "フォロー解除", relationship_path(relationship.id), method: :delete, class: "btn btn-danger" %><br>
+						  <% else %>
+						  	<%= form_with model: @relationship, local: true do |f| %>
+						  		<%= f.hidden_field :followed_id, value: user.id %>
+						  		<%= f.submit "フォロー", class: "btn btn-outline-success" %>
+						  	<% end %>
+						  <% end %><br>
+						</div>
+
+						<div class="col-md-5">
+						  <div class="follow-count">
+						  	<%= link_to "フォロー数#{user.following.count}", user_follow_path(user), class: "text-dark" %>  <%= link_to "フォロワー数#{user.follower.count}", user_follower_path(user), class: "text-dark" %>
+						  </div><br>
+						</div>
+
+
+
+					</div>
+
+				</div>
+			<% end %>
+			<%= paginate @follow %>
+		</div><br><br>
+	<% else %>
+		<h3>フォローしているユーザーはいません</h3>
+	<% end %>
+</div>

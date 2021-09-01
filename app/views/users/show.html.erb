@@ -21,8 +21,21 @@
   <% else %>
     <h3><%= link_to "名前未設定", edit_user_registration_path, class: "text-decoration-none" %></h3><br>
   <% end %><br>
-  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %><br><br>
+  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %>
 
+	  <div class="follow-count">
+	  	<%= link_to "フォロー数#{@user.following.count}", user_follow_path(@user), class: "text-dark" %>  <%= link_to "フォロワー数#{@user.follower.count}", user_follower_path(@user), class: "text-dark" %>
+	  </div><br>
+
+  <% if current_user.following.include?(@user) %>
+  	<% relationship = Relationship.find_by(follower_id: current_user.id, followed_id: @user.id) %>
+  	<%= link_to "フォロー解除", relationship_path(relationship.id), method: :delete, class: "btn btn-danger" %><br>
+  <% else %>
+  	<%= form_with model: @relationship, local: true do |f| %>
+  		<%= f.hidden_field :followed_id, value: @user.id %>
+  		<%= f.submit "フォロー", class: "btn btn-outline-success" %>
+  	<% end %>
+  <% end %><br>
 
   <h1>
   	<% if @user.id == current_user.id %>
