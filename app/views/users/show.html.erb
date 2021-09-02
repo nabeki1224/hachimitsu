@@ -21,15 +21,17 @@
   <% else %>
     <h3><%= link_to "名前未設定", edit_user_registration_path, class: "text-decoration-none" %></h3><br>
   <% end %><br>
-  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %>
+  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-success text-light" if @user.id == current_user.id %><br><br>
 
   <div class="follow_count_<%= @user.id %>">
-  	<%= render 'follows/followcount', user: @user %>
-  </div><br>
+	  <%= render 'follows/followcount', user: @user %>
+	</div><br>
 
-	<div class="follow_btn_<%= @user.id %>">
-		<%= render 'follows/followbtn', user: @user, relationship: @relationship %>
-	</div>
+  <% if @user.id != current_user.id %>	
+		<div class="follow_btn_<%= @user.id %>">
+			<%= render 'follows/followbtn', user: @user, relationship: @relationship %>
+		</div>
+	<% end %>
 
   <h1>
   	<% if @user.id == current_user.id %>
